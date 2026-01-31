@@ -1,0 +1,334 @@
+/* ========================================
+   DESIGN SYSTEM - Alonso Madroñal Portfolio
+   ======================================== */
+
+/* ----------------------------------------
+   CSS Custom Properties (Design Tokens)
+   ---------------------------------------- */
+:root {
+  /* === PROFESSIONAL MODE (Light - Default) === */
+  --color-bg-primary: #fafafa;
+  --color-bg-secondary: #f0f0f0;
+  --color-bg-tertiary: #e5e5e5;
+  --color-text-primary: #2a2a2a;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #6a6a6a;
+  --color-accent-orange: #d97706;
+  --color-accent-orange-hover: #b45309;
+  --color-accent-teal: #0d9488;
+  --color-accent-teal-hover: #0f766e;
+  --color-border: #d4d4d4;
+  --color-border-light: #e5e5e5;
+
+  /* === TYPOGRAPHY === */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
+  --font-display: 'Space Grotesk', var(--font-primary);
+  
+  /* Font Sizes - Fluid Scale */
+  --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+  --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+  --text-base: clamp(1rem, 0.9rem + 0.5vw, 1.125rem);
+  --text-lg: clamp(1.125rem, 1rem + 0.6vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.1rem + 0.75vw, 1.5rem);
+  --text-2xl: clamp(1.5rem, 1.25rem + 1.25vw, 2rem);
+  --text-3xl: clamp(1.875rem, 1.5rem + 1.875vw, 2.5rem);
+  --text-4xl: clamp(2.25rem, 1.75rem + 2.5vw, 3.5rem);
+  --text-5xl: clamp(3rem, 2rem + 5vw, 5rem);
+
+  /* Font Weights */
+  --font-light: 300;
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Line Heights */
+  --leading-tight: 1.2;
+  --leading-snug: 1.375;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.625;
+
+  /* === SPACING === */
+  --space-xs: 0.25rem;
+  --space-sm: 0.5rem;
+  --space-md: 1rem;
+  --space-lg: 1.5rem;
+  --space-xl: 2rem;
+  --space-2xl: 3rem;
+  --space-3xl: 4rem;
+  --space-4xl: 6rem;
+  --space-5xl: 8rem;
+
+  /* === LAYOUT === */
+  --container-max: 1200px;
+  --container-narrow: 800px;
+  --header-height: 4rem;
+  --section-padding: clamp(3rem, 8vw, 6rem);
+
+  /* === BORDERS & SHADOWS === */
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.5rem;
+  --radius-full: 9999px;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+
+  /* === TRANSITIONS === */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 400ms ease;
+  --transition-mode: 500ms ease-in-out;
+
+  /* === Z-INDEX SCALE === */
+  --z-base: 1;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal: 400;
+  --z-tooltip: 500;
+
+  /* === ACTIVE COLORS (will be swapped by modes) === */
+  --active-bg-primary: var(--color-bg-primary);
+  --active-bg-secondary: var(--color-bg-secondary);
+  --active-text-primary: var(--color-text-primary);
+  --active-text-secondary: var(--color-text-secondary);
+  --active-accent-1: var(--color-accent-orange);
+  --active-accent-2: var(--color-accent-teal);
+  --active-border: var(--color-border);
+}
+
+/* ----------------------------------------
+   DARK MODE (Professional)
+   ---------------------------------------- */
+[data-theme="dark"] {
+  --color-bg-primary: #1a1a1a;
+  --color-bg-secondary: #2a2a2a;
+  --color-bg-tertiary: #3a3a3a;
+  --color-text-primary: #e5e5e5;
+  --color-text-secondary: #b5b5b5;
+  --color-text-muted: #8a8a8a;
+  --color-border: #404040;
+  --color-border-light: #333333;
+  
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
+
+  --active-bg-primary: var(--color-bg-primary);
+  --active-bg-secondary: var(--color-bg-secondary);
+  --active-text-primary: var(--color-text-primary);
+  --active-text-secondary: var(--color-text-secondary);
+  --active-border: var(--color-border);
+}
+
+/* ----------------------------------------
+   ARTISTIC MODE
+   ---------------------------------------- */
+[data-mode="artistic"] {
+  --color-bg-primary: #0a0a0a;
+  --color-bg-secondary: #121212;
+  --color-bg-tertiary: #1a1a1a;
+  --color-text-primary: #f0f0f0;
+  --color-text-secondary: #c0c0c0;
+  --color-text-muted: #808080;
+  --color-accent-neon-green: #00ff88;
+  --color-accent-magenta: #ff00ff;
+  --color-accent-cyan: #00ffff;
+  --color-border: #2a2a2a;
+  --color-border-light: #1f1f1f;
+
+  --active-bg-primary: var(--color-bg-primary);
+  --active-bg-secondary: var(--color-bg-secondary);
+  --active-text-primary: var(--color-text-primary);
+  --active-text-secondary: var(--color-text-secondary);
+  --active-accent-1: var(--color-accent-neon-green);
+  --active-accent-2: var(--color-accent-magenta);
+  --active-border: var(--color-border);
+}
+
+/* ----------------------------------------
+   BASE RESET & DEFAULTS
+   ---------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-primary);
+  font-size: var(--text-base);
+  line-height: var(--leading-normal);
+  color: var(--active-text-primary);
+  background-color: var(--active-bg-primary);
+  transition: background-color var(--transition-mode), color var(--transition-mode);
+  min-height: 100vh;
+}
+
+/* ----------------------------------------
+   UTILITY CLASSES
+   ---------------------------------------- */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--space-lg);
+}
+
+.container--narrow {
+  max-width: var(--container-narrow);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Text utilities */
+.text-accent-1 { color: var(--active-accent-1); }
+.text-accent-2 { color: var(--active-accent-2); }
+.text-muted { color: var(--active-text-secondary); }
+
+/* Font utilities */
+.font-mono { font-family: var(--font-mono); }
+.font-display { font-family: var(--font-display); }
+
+/* ----------------------------------------
+   SELECTION STYLES
+   ---------------------------------------- */
+::selection {
+  background-color: var(--active-accent-1);
+  color: var(--color-bg-primary);
+}
+
+/* ----------------------------------------
+   FOCUS STYLES (Accessibility)
+   ---------------------------------------- */
+:focus-visible {
+  outline: 2px solid var(--active-accent-1);
+  outline-offset: 2px;
+}
+
+/* ----------------------------------------
+   SCROLLBAR STYLES
+   ---------------------------------------- */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--active-bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--active-text-secondary);
+  border-radius: var(--radius-full);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--active-accent-1);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--active-text-secondary) var(--active-bg-secondary);
+}
+
+/* ----------------------------------------
+   LINK STYLES
+   ---------------------------------------- */
+a {
+  color: var(--active-accent-1);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--active-accent-2);
+}
+
+/* ----------------------------------------
+   BUTTON BASE
+   ---------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-primary);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  line-height: 1;
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.btn--primary {
+  background-color: var(--active-accent-1);
+  color: var(--color-bg-primary);
+}
+
+.btn--primary:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.btn--secondary {
+  background-color: transparent;
+  color: var(--active-accent-1);
+  border: 1px solid var(--active-accent-1);
+}
+
+.btn--secondary:hover {
+  background-color: var(--active-accent-1);
+  color: var(--color-bg-primary);
+}
+
+/* ----------------------------------------
+   CODE BLOCKS
+   ---------------------------------------- */
+code, pre {
+  font-family: var(--font-mono);
+  font-size: var(--text-sm);
+}
+
+code {
+  background-color: var(--active-bg-secondary);
+  padding: 0.125em 0.375em;
+  border-radius: var(--radius-sm);
+}
+
+pre {
+  background-color: var(--active-bg-secondary);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  overflow-x: auto;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}

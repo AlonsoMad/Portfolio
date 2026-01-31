@@ -1,0 +1,92 @@
+{
+  "projects": [
+    {
+      "id": "mind-industry",
+      "name": "mind-industry",
+      "description": "Multilingual Inconsistent Notion Detection (Industry version). Adapts research-level NLP techniques for industrial-scale applications, focusing on maintaining conceptual consistency across different languages.",
+      "technologies": ["Python", "Docker", "LLMs", "NLP", "Topic Modeling"],
+      "category": "nlp",
+      "github": "https://github.com/AlonsoMad/mind-industry",
+      "featured": true,
+      "date": "2024-2025",
+      "commit": "feat/industry-adaption",
+      "highlights": [
+        "Polylingual topic modeling",
+        "Hybrid retrieval systems",
+        "Large Language Model integration"
+      ]
+    },
+    {
+      "id": "pic-utils",
+      "name": "Pic_utils",
+      "description": "A curated collection of Python tools for image processing, specifically tailored for artistic and creative purposes. Unlike standard image processing libraries, this toolkit focuses on creating textures, filters, and generative visual effects.",
+      "technologies": ["Python", "Image Processing"],
+      "category": "creative",
+      "github": "https://github.com/AlonsoMad/Pic_utils",
+      "featured": true,
+      "date": "2023-2024",
+      "commit": "main/artistic-filters",
+      "highlights": [
+        "Texture manipulation algorithms",
+        "Glitch art generation",
+        "Creative visual filters"
+      ],
+      "artisticShowcase": true
+    },
+    {
+      "id": "tfg-llms",
+      "name": "TFG-LLMs",
+      "description": "Bachelor's Thesis research project exploring Large Language Models, their architectures, and applications in natural language processing tasks.",
+      "technologies": ["Python", "Jupyter", "LLMs", "Research"],
+      "category": "research",
+      "github": "https://github.com/AlonsoMad/TFG-LLMs",
+      "featured": false,
+      "date": "2023",
+      "commit": "thesis/final",
+      "highlights": [
+        "LLM architecture analysis",
+        "Performance benchmarking",
+        "Academic research methodology"
+      ]
+    },
+    {
+      "id": "multi-download",
+      "name": "Multi-download",
+      "description": "Bash & Python scripts for a simplified CLI downloading experience. Streamlines batch downloading with customizable options and progress tracking.",
+      "technologies": ["Bash", "Python", "CLI"],
+      "category": "utilities",
+      "github": "https://github.com/AlonsoMad/Multi-download",
+      "featured": false,
+      "date": "2022-2023",
+      "commit": "feat/batch-processing",
+      "highlights": [
+        "Parallel downloads",
+        "Progress visualization",
+        "Cross-platform compatibility"
+      ]
+    },
+    {
+      "id": "lagrange-squares",
+      "name": "Lagrange-Squares",
+      "description": "Mathematical and computational project implementing Lagrange polynomial interpolation and least squares fitting algorithms.",
+      "technologies": ["Python", "Mathematics", "Algorithms"],
+      "category": "research",
+      "github": "https://github.com/AlonsoMad/Lagrange-Squares",
+      "featured": false,
+      "date": "2022",
+      "commit": "main/algorithms",
+      "highlights": [
+        "Polynomial interpolation",
+        "Least squares fitting",
+        "Numerical methods"
+      ]
+    }
+  ],
+  "categories": [
+    { "id": "all", "label": "All Projects" },
+    { "id": "nlp", "label": "NLP / AI" },
+    { "id": "creative", "label": "Creative Tools" },
+    { "id": "research", "label": "Research" },
+    { "id": "utilities", "label": "Utilities" }
+  ]
+}

@@ -1,0 +1,142 @@
+{
+    "en": {
+        "meta": {
+            "title": "Alonso Madroñal | AI Engineer & Creative Developer",
+            "description": "AI Engineer specializing in NLP and LLMs, with a passion for creative coding and digital art."
+        },
+        "nav": {
+            "projects": "Projects",
+            "about": "About",
+            "contact": "Contact"
+        },
+        "hero": {
+            "greeting": "Hi, I'm",
+            "name": "Alonso Madroñal",
+            "tagline": "AI engineer, I sometimes get creative",
+            "phrases": [
+                "Building intelligent systems",
+                "Exploring NLP & LLMs",
+                "Creating digital art",
+                "Experimenting with code",
+                "Detecting multilingual inconsistencies",
+                "Processing images artistically"
+            ],
+            "cta": {
+                "projects": "View Projects",
+                "resume": "Download CV"
+            }
+        },
+        "projects": {
+            "title": "Projects",
+            "subtitle": "A selection of my work in AI, NLP, and creative coding",
+            "filterAll": "All",
+            "viewCode": "View Code",
+            "viewDemo": "View Demo",
+            "featured": "Featured"
+        },
+        "about": {
+            "title": "About Me",
+            "subtitle": "Get to know me better",
+            "bio": [
+                "I'm an AI Engineer with a focus on Natural Language Processing and Large Language Models. My work bridges the gap between cutting-edge research and practical industry applications.",
+                "Currently working on multilingual inconsistency detection systems, I'm passionate about making AI understand and process human language across different cultures and contexts.",
+                "Beyond the technical world, I explore the intersection of code and art. My Pic_utils project reflects my belief that programming can be a medium for creative expression—generating textures, glitch effects, and visual experiments."
+            ],
+            "skillsTitle": "Technologies I work with",
+            "artisticNote": "When I'm not training models, you might find me experimenting with digital art and image processing."
+        },
+        "contact": {
+            "title": "Get In Touch",
+            "subtitle": "Let's connect",
+            "text": "I'm always open to discussing new projects, creative ideas, or opportunities to be part of something interesting.",
+            "emailLabel": "Say hello at",
+            "galleryLink": "View my art gallery"
+        },
+        "footer": {
+            "builtWith": "Built with",
+            "by": "by Alonso Madroñal"
+        },
+        "artistic": {
+            "toggleLabel": "Creative Mode",
+            "galleryTitle": "Digital Art Gallery",
+            "gallerySubtitle": "Experimental visual works created with code",
+            "viewFullGallery": "View Full Gallery"
+        },
+        "404": {
+            "title": "404",
+            "subtitle": "Lost in the wires",
+            "message": "The page you're looking for doesn't exist or has been moved.",
+            "backHome": "Back to Home"
+        }
+    },
+    "es": {
+        "meta": {
+            "title": "Alonso Madroñal | Ingeniero de IA y Desarrollador Creativo",
+            "description": "Ingeniero de IA especializado en NLP y LLMs, con pasión por la programación creativa y el arte digital."
+        },
+        "nav": {
+            "projects": "Proyectos",
+            "about": "Sobre mí",
+            "contact": "Contacto"
+        },
+        "hero": {
+            "greeting": "Hola, soy",
+            "name": "Alonso Madroñal",
+            "tagline": "Ingeniero de IA, a veces me pongo creativo",
+            "phrases": [
+                "Construyendo sistemas inteligentes",
+                "Explorando NLP y LLMs",
+                "Creando arte digital",
+                "Experimentando con código",
+                "Detectando inconsistencias multilingües",
+                "Procesando imágenes artísticamente"
+            ],
+            "cta": {
+                "projects": "Ver Proyectos",
+                "resume": "Descargar CV"
+            }
+        },
+        "projects": {
+            "title": "Proyectos",
+            "subtitle": "Una selección de mi trabajo en IA, NLP y programación creativa",
+            "filterAll": "Todos",
+            "viewCode": "Ver Código",
+            "viewDemo": "Ver Demo",
+            "featured": "Destacado"
+        },
+        "about": {
+            "title": "Sobre Mí",
+            "subtitle": "Conóceme mejor",
+            "bio": [
+                "Soy Ingeniero de IA con enfoque en Procesamiento de Lenguaje Natural y Modelos de Lenguaje Grande. Mi trabajo conecta la investigación de vanguardia con aplicaciones prácticas en la industria.",
+                "Actualmente trabajo en sistemas de detección de inconsistencias multilingües, apasionado por hacer que la IA comprenda y procese el lenguaje humano en diferentes culturas y contextos.",
+                "Más allá del mundo técnico, exploro la intersección entre código y arte. Mi proyecto Pic_utils refleja mi creencia de que la programación puede ser un medio de expresión creativa—generando texturas, efectos glitch y experimentos visuales."
+            ],
+            "skillsTitle": "Tecnologías con las que trabajo",
+            "artisticNote": "Cuando no estoy entrenando modelos, puedes encontrarme experimentando con arte digital y procesamiento de imágenes."
+        },
+        "contact": {
+            "title": "Contacto",
+            "subtitle": "Conectemos",
+            "text": "Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de algo interesante.",
+            "emailLabel": "Escríbeme a",
+            "galleryLink": "Ver mi galería de arte"
+        },
+        "footer": {
+            "builtWith": "Hecho con",
+            "by": "por Alonso Madroñal"
+        },
+        "artistic": {
+            "toggleLabel": "Modo Creativo",
+            "galleryTitle": "Galería de Arte Digital",
+            "gallerySubtitle": "Obras visuales experimentales creadas con código",
+            "viewFullGallery": "Ver Galería Completa"
+        },
+        "404": {
+            "title": "404",
+            "subtitle": "Perdido entre cables",
+            "message": "La página que buscas no existe o ha sido movida.",
+            "backHome": "Volver al Inicio"
+        }
+    }
+}
