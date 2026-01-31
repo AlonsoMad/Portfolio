@@ -58,72 +58,18 @@ const CONFIG = {
 // ----------------------------------------
 // CONTENT DATA (for language switching)
 // ----------------------------------------
-const CONTENT = {
-  en: {
-    nav: { projects: 'Projects', about: 'About', contact: 'Contact' },
-    hero: {
-      greeting: "Hi, I'm",
-      tagline: 'AI engineer, I sometimes get creative',
-      ctaProjects: 'View Projects',
-      ctaResume: 'Download CV'
-    },
-    projects: {
-      title: 'Projects',
-      subtitle: 'A selection of my work in AI, NLP, and creative coding',
-      filters: { all: 'All', nlp: 'NLP / AI', creative: 'Creative Tools', research: 'Research', utilities: 'Utilities' }
-    },
-    about: {
-      title: 'About Me',
-      subtitle: 'Get to know me better',
-      bio: [
-        'I\'m an <span class="about__highlight">AI Engineer</span> with a focus on <span class="about__highlight">Natural Language Processing</span> and <span class="about__highlight">Large Language Models</span>. My work bridges the gap between cutting-edge research and practical industry applications.',
-        'Currently working on multilingual inconsistency detection systems, I\'m passionate about making AI understand and process human language across different cultures and contexts.',
-        'Beyond the technical world, I explore the intersection of <span class="about__highlight">code and art</span>. My Pic_utils project reflects my belief that programming can be a medium for creative expression—generating textures, glitch effects, and visual experiments.'
-      ],
-      skillsTitle: 'Technologies I work with',
-      artisticNote: 'When I\'m not training models, you might find me experimenting with digital art and image processing.',
-      galleryBtn: 'View Art Gallery'
-    },
-    contact: {
-      title: 'Get In Touch',
-      subtitle: "Let's connect",
-      text: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of something interesting."
-    },
-    footer: 'Built with care by Alonso Madroñal'
-  },
-  es: {
-    nav: { projects: 'Proyectos', about: 'Sobre mí', contact: 'Contacto' },
-    hero: {
-      greeting: 'Hola, soy',
-      tagline: 'Ingeniero de IA, a veces me pongo creativo',
-      ctaProjects: 'Ver Proyectos',
-      ctaResume: 'Descargar CV'
-    },
-    projects: {
-      title: 'Proyectos',
-      subtitle: 'Una selección de mi trabajo en IA, NLP y programación creativa',
-      filters: { all: 'Todos', nlp: 'NLP / IA', creative: 'Herramientas Creativas', research: 'Investigación', utilities: 'Utilidades' }
-    },
-    about: {
-      title: 'Sobre Mí',
-      subtitle: 'Conóceme mejor',
-      bio: [
-        'Soy <span class="about__highlight">Ingeniero de IA</span> con enfoque en <span class="about__highlight">Procesamiento de Lenguaje Natural</span> y <span class="about__highlight">Modelos de Lenguaje Grande</span>. Mi trabajo conecta la investigación de vanguardia con aplicaciones prácticas en la industria.',
-        'Actualmente trabajo en sistemas de detección de inconsistencias multilingües, apasionado por hacer que la IA comprenda y procese el lenguaje humano en diferentes culturas y contextos.',
-        'Más allá del mundo técnico, exploro la intersección entre <span class="about__highlight">código y arte</span>. Mi proyecto Pic_utils refleja mi creencia de que la programación puede ser un medio de expresión creativa—generando texturas, efectos glitch y experimentos visuales.'
-      ],
-      skillsTitle: 'Tecnologías con las que trabajo',
-      artisticNote: 'Cuando no estoy entrenando modelos, puedes encontrarme experimentando con arte digital y procesamiento de imágenes.',
-      galleryBtn: 'Ver Galería de Arte'
-    },
-    contact: {
-      title: 'Contacto',
-      subtitle: 'Conectemos',
-      text: 'Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de algo interesante.'
-    },
-    footer: 'Hecho con cariño por Alonso Madroñal'
+let CONTENT = {};
+
+async function loadContent() {
+  try {
+    const response = await fetch('data/content.json');
+    CONTENT = await response.json();
+    return true;
+  } catch (error) {
+    console.error('Error loading content:', error);
+    return false;
   }
-};
+}
 
 // ----------------------------------------
 // DOM ELEMENTS
@@ -227,12 +173,16 @@ function applyMode(mode) {
 // ----------------------------------------
 // LANGUAGE TOGGLE
 // ----------------------------------------
-function initLanguage() {
+async function initLanguage() {
   const savedLang = localStorage.getItem(CONFIG.storageKeys.lang);
   const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
 
   state.currentLang = savedLang || browserLang;
-  applyLanguage(state.currentLang);
+
+  const success = await loadContent();
+  if (success) {
+    applyLanguage(state.currentLang);
+  }
 
   if (DOM.langToggle) {
     DOM.langToggle.addEventListener('click', toggleLanguage);
@@ -271,8 +221,8 @@ function applyLanguage(lang) {
 
   if (heroGreeting) heroGreeting.textContent = content.hero.greeting;
   if (heroTagline) heroTagline.textContent = content.hero.tagline;
-  if (ctaButtons[0]) ctaButtons[0].textContent = content.hero.ctaProjects;
-  if (ctaButtons[1]) ctaButtons[1].textContent = content.hero.ctaResume;
+  if (ctaButtons[0]) ctaButtons[0].textContent = content.hero.cta.projects;
+  if (ctaButtons[1]) ctaButtons[1].textContent = content.hero.cta.resume;
 
   // Update section titles
   const projectsTitle = document.querySelector('#projects .section__title');
@@ -301,6 +251,17 @@ function applyLanguage(lang) {
   if (aboutArtisticNote) aboutArtisticNote.textContent = content.about.artisticNote;
   if (aboutSkillsTitle) aboutSkillsTitle.textContent = content.about.skillsTitle;
 
+  // Update skills list
+  const skillsContainer = document.querySelector('#about .skills');
+  if (skillsContainer && content.about.skills) {
+    skillsContainer.innerHTML = content.about.skills.map(skill => `
+      <div class="skill">
+        <span class="skill__icon">></span>
+        <span>${skill}</span>
+      </div>
+    `).join('');
+  }
+
   if (contactTitle) contactTitle.textContent = content.contact.title;
   if (contactSubtitle) contactSubtitle.textContent = content.contact.subtitle;
   if (contactText) contactText.textContent = content.contact.text;
@@ -316,7 +277,9 @@ function applyLanguage(lang) {
 
   // Update footer
   const footerText = document.querySelector('.footer__text');
-  if (footerText) footerText.textContent = content.footer;
+  if (footerText && content.footer) {
+    footerText.textContent = `${content.footer.builtWith} ${content.footer.by}`;
+  }
 
   // Update gallery button
   const galleryBtn = document.querySelector('#galleryLink .btn');

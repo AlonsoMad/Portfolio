@@ -18,13 +18,20 @@
         :root {
             --color-bg: #fafafa;
             --color-text: #2a2a2a;
-            --color-accent: #d97706;
+            --color-accent: #0d9488;
+        }
+
+        [data-theme="dark"] {
+            --color-bg: #1a1a1a;
+            --color-text: #e5e5e5;
+            --color-accent: #f97316;
         }
 
         @media (prefers-color-scheme: dark) {
-            :root {
+            :root:not([data-theme="light"]) {
                 --color-bg: #1a1a1a;
                 --color-text: #e5e5e5;
+                --color-accent: #f97316;
             }
         }
 
@@ -153,10 +160,10 @@
 
     <div class="content">
         <h1 class="error-code">404</h1>
-        <h2 class="error-title">Lost in the wires</h2>
+        <h2 class="error-title">¿Necesitas un cable?</h2>
         <p class="error-message">
-            The page you're looking for doesn't exist or has been moved.
-            Maybe it got tangled in the power lines.
+            La página que buscas no se encuentra aquí.
+            Lo más probable es que nunca haya existido.
         </p>
         <a href="index.html" class="back-link">
             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

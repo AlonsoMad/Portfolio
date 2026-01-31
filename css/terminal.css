@@ -170,8 +170,17 @@
     --frosted-bg-rgb: 26, 26, 26;
 }
 
+/* Dark mode: NO frosting effect for better terminal readability */
 [data-theme="dark"] .section--frosted {
-    background-color: rgba(var(--frosted-bg-rgb), 0.9);
+    background-color: transparent;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+}
+
+/* Hide gradient overlays in dark mode */
+[data-theme="dark"] .section--frosted::before,
+[data-theme="dark"] .section--frosted::after {
+    display: none;
 }
 
 /* Brighter terminal colors for dark mode readability */
