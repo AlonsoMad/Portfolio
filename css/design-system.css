@@ -24,7 +24,7 @@
   --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
   --font-mono: 'JetBrains Mono', 'Fira Code', 'Consolas', monospace;
   --font-display: 'Space Grotesk', var(--font-primary);
-  
+
   /* Font Sizes - Fluid Scale */
   --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
   --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
@@ -72,7 +72,7 @@
   --radius-lg: 1rem;
   --radius-xl: 1.5rem;
   --radius-full: 9999px;
-  
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
@@ -97,9 +97,13 @@
   --active-bg-secondary: var(--color-bg-secondary);
   --active-text-primary: var(--color-text-primary);
   --active-text-secondary: var(--color-text-secondary);
-  --active-accent-1: var(--color-accent-orange);
-  --active-accent-2: var(--color-accent-teal);
+  --active-accent-1: var(--color-accent-teal);
+  --active-accent-2: var(--color-accent-orange);
   --active-border: var(--color-border);
+
+  /* === TERMINAL BACKGROUND === */
+  --terminal-blur: 0.5px;
+  --terminal-opacity: 0.9;
 }
 
 /* ----------------------------------------
@@ -114,7 +118,7 @@
   --color-text-muted: #8a8a8a;
   --color-border: #404040;
   --color-border-light: #333333;
-  
+
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
   --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.4), 0 2px 4px -2px rgba(0, 0, 0, 0.3);
   --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.4), 0 4px 6px -4px rgba(0, 0, 0, 0.3);
@@ -123,6 +127,8 @@
   --active-bg-secondary: var(--color-bg-secondary);
   --active-text-primary: var(--color-text-primary);
   --active-text-secondary: var(--color-text-secondary);
+  --active-accent-1: var(--color-accent-orange);
+  --active-accent-2: var(--color-accent-teal);
   --active-border: var(--color-border);
 }
 
@@ -154,7 +160,9 @@
 /* ----------------------------------------
    BASE RESET & DEFAULTS
    ---------------------------------------- */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
@@ -203,13 +211,26 @@ body {
 }
 
 /* Text utilities */
-.text-accent-1 { color: var(--active-accent-1); }
-.text-accent-2 { color: var(--active-accent-2); }
-.text-muted { color: var(--active-text-secondary); }
+.text-accent-1 {
+  color: var(--active-accent-1);
+}
+
+.text-accent-2 {
+  color: var(--active-accent-2);
+}
+
+.text-muted {
+  color: var(--active-text-secondary);
+}
 
 /* Font utilities */
-.font-mono { font-family: var(--font-mono); }
-.font-display { font-family: var(--font-display); }
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
 
 /* ----------------------------------------
    SELECTION STYLES
@@ -310,7 +331,8 @@ a:hover {
 /* ----------------------------------------
    CODE BLOCKS
    ---------------------------------------- */
-code, pre {
+code,
+pre {
   font-family: var(--font-mono);
   font-size: var(--text-sm);
 }

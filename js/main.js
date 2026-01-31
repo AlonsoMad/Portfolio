@@ -7,20 +7,121 @@
 // CONFIGURATION
 // ----------------------------------------
 const CONFIG = {
-  typewriterSpeed: 80,
-  typewriterPause: 2000,
-  phrases: [
-    "Building intelligent systems",
-    "Exploring NLP & LLMs",
-    "Creating digital art",
-    "Experimenting with code",
-    "Detecting multilingual inconsistencies",
-    "Processing images artistically"
-  ],
+  typewriterSpeed: 60,
+  typewriterDeleteSpeed: 30,
+  typewriterPause: 2500,
+
+  // Terminal phrases - EDIT THESE TO CUSTOMIZE
+  // Format: { trigger: 'element-id or default', phrases: ['phrase1', 'phrase2'] }
+  terminalPhrases: {
+    default: [
+      "Building intelligent systems...",
+      "Exploring NLP & LLMs...",
+      "Processing language data...",
+      "Training models on multilingual corpora..."
+    ],
+    // Project-specific phrases (triggered on hover)
+    'mind-industry': [
+      "git checkout mind-industry",
+      "Detecting multilingual inconsistencies...",
+      "Polylingual topic modeling active..."
+    ],
+    'pic-utils': [
+      "git checkout pic-utils",
+      "Generating artistic textures...",
+      "Applying glitch effects..."
+    ],
+    'tfg-llms': [
+      "git checkout tfg-llms",
+      "Analyzing LLM architectures...",
+      "Running benchmark tests..."
+    ],
+    'multi-download': [
+      "git checkout multi-download",
+      "Initializing batch download...",
+      "Progress: [████████░░] 80%"
+    ],
+    'lagrange-squares': [
+      "git checkout lagrange-squares",
+      "Computing polynomial interpolation...",
+      "Fitting least squares..."
+    ]
+  },
+
   storageKeys: {
     theme: 'portfolio-theme',
     mode: 'portfolio-mode',
     lang: 'portfolio-lang'
+  }
+};
+
+// ----------------------------------------
+// CONTENT DATA (for language switching)
+// ----------------------------------------
+const CONTENT = {
+  en: {
+    nav: { projects: 'Projects', about: 'About', contact: 'Contact' },
+    hero: {
+      greeting: "Hi, I'm",
+      tagline: 'AI engineer, I sometimes get creative',
+      ctaProjects: 'View Projects',
+      ctaResume: 'Download CV'
+    },
+    projects: {
+      title: 'Projects',
+      subtitle: 'A selection of my work in AI, NLP, and creative coding',
+      filters: { all: 'All', nlp: 'NLP / AI', creative: 'Creative Tools', research: 'Research', utilities: 'Utilities' }
+    },
+    about: {
+      title: 'About Me',
+      subtitle: 'Get to know me better',
+      bio: [
+        'I\'m an <span class="about__highlight">AI Engineer</span> with a focus on <span class="about__highlight">Natural Language Processing</span> and <span class="about__highlight">Large Language Models</span>. My work bridges the gap between cutting-edge research and practical industry applications.',
+        'Currently working on multilingual inconsistency detection systems, I\'m passionate about making AI understand and process human language across different cultures and contexts.',
+        'Beyond the technical world, I explore the intersection of <span class="about__highlight">code and art</span>. My Pic_utils project reflects my belief that programming can be a medium for creative expression—generating textures, glitch effects, and visual experiments.'
+      ],
+      skillsTitle: 'Technologies I work with',
+      artisticNote: 'When I\'m not training models, you might find me experimenting with digital art and image processing.',
+      galleryBtn: 'View Art Gallery'
+    },
+    contact: {
+      title: 'Get In Touch',
+      subtitle: "Let's connect",
+      text: "I'm always open to discussing new projects, creative ideas, or opportunities to be part of something interesting."
+    },
+    footer: 'Built with care by Alonso Madroñal'
+  },
+  es: {
+    nav: { projects: 'Proyectos', about: 'Sobre mí', contact: 'Contacto' },
+    hero: {
+      greeting: 'Hola, soy',
+      tagline: 'Ingeniero de IA, a veces me pongo creativo',
+      ctaProjects: 'Ver Proyectos',
+      ctaResume: 'Descargar CV'
+    },
+    projects: {
+      title: 'Proyectos',
+      subtitle: 'Una selección de mi trabajo en IA, NLP y programación creativa',
+      filters: { all: 'Todos', nlp: 'NLP / IA', creative: 'Herramientas Creativas', research: 'Investigación', utilities: 'Utilidades' }
+    },
+    about: {
+      title: 'Sobre Mí',
+      subtitle: 'Conóceme mejor',
+      bio: [
+        'Soy <span class="about__highlight">Ingeniero de IA</span> con enfoque en <span class="about__highlight">Procesamiento de Lenguaje Natural</span> y <span class="about__highlight">Modelos de Lenguaje Grande</span>. Mi trabajo conecta la investigación de vanguardia con aplicaciones prácticas en la industria.',
+        'Actualmente trabajo en sistemas de detección de inconsistencias multilingües, apasionado por hacer que la IA comprenda y procese el lenguaje humano en diferentes culturas y contextos.',
+        'Más allá del mundo técnico, exploro la intersección entre <span class="about__highlight">código y arte</span>. Mi proyecto Pic_utils refleja mi creencia de que la programación puede ser un medio de expresión creativa—generando texturas, efectos glitch y experimentos visuales.'
+      ],
+      skillsTitle: 'Tecnologías con las que trabajo',
+      artisticNote: 'Cuando no estoy entrenando modelos, puedes encontrarme experimentando con arte digital y procesamiento de imágenes.',
+      galleryBtn: 'Ver Galería de Arte'
+    },
+    contact: {
+      title: 'Contacto',
+      subtitle: 'Conectemos',
+      text: 'Siempre estoy abierto a discutir nuevos proyectos, ideas creativas u oportunidades para ser parte de algo interesante.'
+    },
+    footer: 'Hecho con cariño por Alonso Madroñal'
   }
 };
 
@@ -36,7 +137,8 @@ const DOM = {
   themeToggle: document.getElementById('themeToggle'),
   modeToggle: document.getElementById('modeToggle'),
   langToggle: document.getElementById('langToggle'),
-  typewriter: document.getElementById('typewriter'),
+  terminalBg: document.getElementById('terminalBg'),
+  terminalText: document.getElementById('terminalText'),
   projectFilter: document.getElementById('projectFilter'),
   projectsTimeline: document.getElementById('projectsTimeline'),
   galleryLink: document.getElementById('galleryLink')
@@ -49,8 +151,10 @@ const state = {
   currentTheme: 'light',
   currentMode: 'professional',
   currentLang: 'en',
+  currentPhraseSet: 'default',
   currentPhraseIndex: 0,
-  typewriterTimeout: null
+  typewriterTimeout: null,
+  isTyping: false
 };
 
 // ----------------------------------------
@@ -58,15 +162,27 @@ const state = {
 // ----------------------------------------
 function initTheme() {
   const savedTheme = localStorage.getItem(CONFIG.storageKeys.theme);
-  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
-  state.currentTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+  const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+
+  // Set initial theme
+  state.currentTheme = savedTheme || (mediaQuery.matches ? 'dark' : 'light');
   applyTheme(state.currentTheme);
-  
+
+  // Sync toggle state
   if (DOM.themeToggle) {
     DOM.themeToggle.checked = state.currentTheme === 'dark';
     DOM.themeToggle.addEventListener('change', toggleTheme);
   }
+
+  // Listen for system theme changes
+  mediaQuery.addEventListener('change', (e) => {
+    // Only auto-switch if user hasn't manually set a preference
+    if (!localStorage.getItem(CONFIG.storageKeys.theme)) {
+      state.currentTheme = e.matches ? 'dark' : 'light';
+      applyTheme(state.currentTheme);
+      if (DOM.themeToggle) DOM.themeToggle.checked = e.matches;
+    }
+  });
 }
 
 function toggleTheme() {
@@ -77,12 +193,6 @@ function toggleTheme() {
 
 function applyTheme(theme) {
   DOM.html.setAttribute('data-theme', theme);
-  
-  // Update toggle icon
-  const icon = DOM.themeToggle?.parentElement.querySelector('.toggle__icon');
-  if (icon) {
-    icon.textContent = theme === 'dark' ? '☀️' : '🌙';
-  }
 }
 
 // ----------------------------------------
@@ -92,7 +202,7 @@ function initMode() {
   const savedMode = localStorage.getItem(CONFIG.storageKeys.mode);
   state.currentMode = savedMode || 'professional';
   applyMode(state.currentMode);
-  
+
   if (DOM.modeToggle) {
     DOM.modeToggle.checked = state.currentMode === 'artistic';
     DOM.modeToggle.addEventListener('change', toggleMode);
@@ -107,16 +217,10 @@ function toggleMode() {
 
 function applyMode(mode) {
   DOM.html.setAttribute('data-mode', mode);
-  
+
   // Show/hide gallery link in artistic mode
   if (DOM.galleryLink) {
     DOM.galleryLink.style.display = mode === 'artistic' ? 'block' : 'none';
-  }
-  
-  // Update toggle icon
-  const icon = DOM.modeToggle?.parentElement.querySelector('.toggle__icon');
-  if (icon) {
-    icon.textContent = mode === 'artistic' ? '🎨' : '✨';
   }
 }
 
@@ -126,10 +230,10 @@ function applyMode(mode) {
 function initLanguage() {
   const savedLang = localStorage.getItem(CONFIG.storageKeys.lang);
   const browserLang = navigator.language.startsWith('es') ? 'es' : 'en';
-  
+
   state.currentLang = savedLang || browserLang;
   applyLanguage(state.currentLang);
-  
+
   if (DOM.langToggle) {
     DOM.langToggle.addEventListener('click', toggleLanguage);
   }
@@ -143,55 +247,225 @@ function toggleLanguage() {
 
 function applyLanguage(lang) {
   DOM.html.setAttribute('lang', lang);
-  
+
   if (DOM.langToggle) {
     DOM.langToggle.textContent = lang.toUpperCase();
   }
-  
-  // In a full implementation, this would update all text content
-  // For now, we'll keep the English content as default
+
+  const content = CONTENT[lang];
+  if (!content) return;
+
+  // Update navigation
+  const navLinks = document.querySelectorAll('.nav__link');
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href === '#projects') link.textContent = content.nav.projects;
+    if (href === '#about') link.textContent = content.nav.about;
+    if (href === '#contact') link.textContent = content.nav.contact;
+  });
+
+  // Update hero section
+  const heroGreeting = document.querySelector('.hero__greeting');
+  const heroTagline = document.querySelector('.hero__tagline');
+  const ctaButtons = document.querySelectorAll('.hero__cta .btn');
+
+  if (heroGreeting) heroGreeting.textContent = content.hero.greeting;
+  if (heroTagline) heroTagline.textContent = content.hero.tagline;
+  if (ctaButtons[0]) ctaButtons[0].textContent = content.hero.ctaProjects;
+  if (ctaButtons[1]) ctaButtons[1].textContent = content.hero.ctaResume;
+
+  // Update section titles
+  const projectsTitle = document.querySelector('#projects .section__title');
+  const projectsSubtitle = document.querySelector('#projects .section__subtitle');
+  const aboutTitle = document.querySelector('#about .section__title');
+  const aboutSubtitle = document.querySelector('#about .section__subtitle');
+  const contactTitle = document.querySelector('#contact .section__title');
+  const contactSubtitle = document.querySelector('#contact .section__subtitle');
+  const contactText = document.querySelector('.contact__text');
+
+  if (projectsTitle) projectsTitle.textContent = content.projects.title;
+  if (projectsSubtitle) projectsSubtitle.textContent = content.projects.subtitle;
+  if (aboutTitle) aboutTitle.textContent = content.about.title;
+  if (aboutSubtitle) aboutSubtitle.textContent = content.about.subtitle;
+
+  // Update about biography
+  const aboutBio1 = document.getElementById('aboutBio1');
+  const aboutBio2 = document.getElementById('aboutBio2');
+  const aboutBio3 = document.getElementById('aboutBio3');
+  const aboutArtisticNote = document.getElementById('aboutArtisticNote');
+  const aboutSkillsTitle = document.querySelector('#about .about__skills h3');
+
+  if (aboutBio1 && content.about.bio[0]) aboutBio1.innerHTML = content.about.bio[0];
+  if (aboutBio2 && content.about.bio[1]) aboutBio2.innerHTML = content.about.bio[1];
+  if (aboutBio3 && content.about.bio[2]) aboutBio3.innerHTML = content.about.bio[2];
+  if (aboutArtisticNote) aboutArtisticNote.textContent = content.about.artisticNote;
+  if (aboutSkillsTitle) aboutSkillsTitle.textContent = content.about.skillsTitle;
+
+  if (contactTitle) contactTitle.textContent = content.contact.title;
+  if (contactSubtitle) contactSubtitle.textContent = content.contact.subtitle;
+  if (contactText) contactText.textContent = content.contact.text;
+
+  // Update filter buttons
+  const filterBtns = document.querySelectorAll('.filter__btn');
+  filterBtns.forEach(btn => {
+    const filter = btn.dataset.filter;
+    if (content.projects.filters[filter]) {
+      btn.textContent = content.projects.filters[filter];
+    }
+  });
+
+  // Update footer
+  const footerText = document.querySelector('.footer__text');
+  if (footerText) footerText.textContent = content.footer;
+
+  // Update gallery button
+  const galleryBtn = document.querySelector('#galleryLink .btn');
+  if (galleryBtn) galleryBtn.textContent = content.about.galleryBtn;
 }
 
 // ----------------------------------------
-// TYPEWRITER EFFECT
+// TERMINAL TYPEWRITER EFFECT
 // ----------------------------------------
-function initTypewriter() {
-  if (!DOM.typewriter) return;
-  
-  typePhrase();
+function initTerminal() {
+  if (!DOM.terminalText) return;
+  startTerminalTyping('default');
 }
 
-function typePhrase() {
-  const phrase = CONFIG.phrases[state.currentPhraseIndex];
+function startTerminalTyping(phraseSet) {
+  state.currentPhraseSet = phraseSet;
+  state.currentPhraseIndex = 0;
+  typeTerminalPhrase();
+}
+
+function typeTerminalPhrase() {
+  if (state.isTyping) return;
+
+  const phrases = CONFIG.terminalPhrases[state.currentPhraseSet] || CONFIG.terminalPhrases.default;
+  const phrase = phrases[state.currentPhraseIndex];
+
+  state.isTyping = true;
   let charIndex = 0;
-  
-  DOM.typewriter.textContent = '';
-  
+
+  DOM.terminalText.textContent = '';
+
   function typeChar() {
     if (charIndex < phrase.length) {
-      DOM.typewriter.textContent += phrase.charAt(charIndex);
+      DOM.terminalText.textContent += phrase.charAt(charIndex);
       charIndex++;
       state.typewriterTimeout = setTimeout(typeChar, CONFIG.typewriterSpeed);
     } else {
-      // Pause, then delete
-      state.typewriterTimeout = setTimeout(deletePhrase, CONFIG.typewriterPause);
+      state.isTyping = false;
+      // Pause, then delete and type next
+      state.typewriterTimeout = setTimeout(deleteTerminalPhrase, CONFIG.typewriterPause);
     }
   }
-  
+
   typeChar();
 }
 
-function deletePhrase() {
-  const currentText = DOM.typewriter.textContent;
-  
+function deleteTerminalPhrase() {
+  const currentText = DOM.terminalText.textContent;
+
   if (currentText.length > 0) {
-    DOM.typewriter.textContent = currentText.slice(0, -1);
-    state.typewriterTimeout = setTimeout(deletePhrase, CONFIG.typewriterSpeed / 2);
+    DOM.terminalText.textContent = currentText.slice(0, -1);
+    state.typewriterTimeout = setTimeout(deleteTerminalPhrase, CONFIG.typewriterDeleteSpeed);
   } else {
     // Move to next phrase
-    state.currentPhraseIndex = (state.currentPhraseIndex + 1) % CONFIG.phrases.length;
-    state.typewriterTimeout = setTimeout(typePhrase, 500);
+    const phrases = CONFIG.terminalPhrases[state.currentPhraseSet] || CONFIG.terminalPhrases.default;
+    state.currentPhraseIndex = (state.currentPhraseIndex + 1) % phrases.length;
+    state.typewriterTimeout = setTimeout(typeTerminalPhrase, 300);
   }
+}
+
+function changeTerminalPhraseSet(newSet) {
+  if (newSet === state.currentPhraseSet) return;
+
+  // Clear current typing
+  clearTimeout(state.typewriterTimeout);
+  state.isTyping = false;
+
+  // Delete current text first, then start new set
+  deleteTerminalPhrase();
+  state.currentPhraseSet = newSet;
+  state.currentPhraseIndex = 0;
+}
+
+// ----------------------------------------
+// TERMINAL SCROLL FADE & FROSTED GLASS TRANSITION
+// Fades out when reaching Contact section
+// Gradually increases frosting from Hero → Projects → About
+// ----------------------------------------
+function initTerminalScrollFade() {
+  if (!DOM.terminalBg) return;
+
+  const heroSection = document.querySelector('.hero');
+  const aboutSection = document.getElementById('about');
+  const contactSection = document.getElementById('contact');
+  const projectsSection = document.getElementById('projects');
+
+  if (!contactSection || !aboutSection || !projectsSection || !heroSection) return;
+
+  window.addEventListener('scroll', () => {
+    const scrollY = window.scrollY;
+
+    // === FROSTED GLASS GRADUAL TRANSITION ===
+    const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+    const projectsTop = projectsSection.offsetTop;
+    const aboutTop = aboutSection.offsetTop;
+
+    // Phase 1: Hero → Early Projects (0% → 30% frosting)
+    const phase1Start = heroBottom - window.innerHeight * 0.5;
+    const phase1End = projectsTop + window.innerHeight * 0.3;
+
+    // Phase 2: Mid Projects → About (30% → 100% frosting)
+    const phase2Start = aboutTop - window.innerHeight * 0.8;
+    const phase2End = aboutTop - window.innerHeight * 0.2;
+
+    if (scrollY < phase1Start) {
+      // Hero section: no frosting
+      projectsSection.style.setProperty('--dynamic-frost-opacity', '0.5');
+      projectsSection.style.setProperty('--dynamic-frost-blur', '0px');
+    } else if (scrollY >= phase1Start && scrollY < phase1End) {
+      // Phase 1: Gradual introduction of frosting
+      const progress1 = (scrollY - phase1Start) / (phase1End - phase1Start);
+      const opacity = 0.5 + (progress1 * 0.15); // 0.5 → 0.65
+      const blur = 0 + (progress1 * 0.5); // 0px → 0.5px
+      projectsSection.style.setProperty('--dynamic-frost-opacity', opacity.toFixed(2));
+      projectsSection.style.setProperty('--dynamic-frost-blur', `${blur.toFixed(1)}px`);
+    } else if (scrollY >= phase1End && scrollY < phase2Start) {
+      // Mid Projects: light frosting
+      projectsSection.style.setProperty('--dynamic-frost-opacity', '0.65');
+      projectsSection.style.setProperty('--dynamic-frost-blur', '0.5px');
+    } else if (scrollY >= phase2Start && scrollY < phase2End) {
+      // Phase 2: Increase to full frosting
+      const progress2 = (scrollY - phase2Start) / (phase2End - phase2Start);
+      const opacity = 0.65 + (progress2 * 0.3); // 0.65 → 0.95
+      const blur = 0.5 + (progress2 * 11.5); // 0.5px → 12px
+      projectsSection.style.setProperty('--dynamic-frost-opacity', opacity.toFixed(2));
+      projectsSection.style.setProperty('--dynamic-frost-blur', `${blur.toFixed(1)}px`);
+    } else {
+      // About section: full frosting
+      projectsSection.style.setProperty('--dynamic-frost-opacity', '0.95');
+      projectsSection.style.setProperty('--dynamic-frost-blur', '12px');
+    }
+
+    // === TERMINAL FADE OUT ===
+    const contactTop = contactSection.offsetTop;
+    const fadeStart = contactTop - window.innerHeight * 0.5;
+    const fadeEnd = contactTop - window.innerHeight * 0.2;
+
+    if (scrollY < fadeStart) {
+      DOM.terminalBg.classList.remove('terminal-bg--faded');
+      DOM.terminalBg.style.opacity = '';
+    } else if (scrollY > fadeEnd) {
+      DOM.terminalBg.classList.add('terminal-bg--faded');
+    } else {
+      // Calculate opacity during fade
+      const progress = (scrollY - fadeStart) / (fadeEnd - fadeStart);
+      const baseOpacity = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--terminal-opacity') || 0.9);
+      DOM.terminalBg.style.opacity = (1 - progress) * baseOpacity;
+    }
+  });
 }
 
 // ----------------------------------------
@@ -199,17 +473,17 @@ function deletePhrase() {
 // ----------------------------------------
 function initMobileNav() {
   if (!DOM.mobileToggle || !DOM.navMenu) return;
-  
+
   DOM.mobileToggle.addEventListener('click', () => {
     DOM.navMenu.classList.toggle('nav__menu--open');
-    
+
     // Update icon
     const isOpen = DOM.navMenu.classList.contains('nav__menu--open');
     DOM.mobileToggle.innerHTML = isOpen
       ? '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>'
       : '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>';
   });
-  
+
   // Close menu when clicking a link
   DOM.navMenu.querySelectorAll('.nav__link').forEach(link => {
     link.addEventListener('click', () => {
@@ -223,14 +497,14 @@ function initMobileNav() {
 // ----------------------------------------
 function initSmoothScroll() {
   document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function(e) {
+    anchor.addEventListener('click', function (e) {
       e.preventDefault();
       const target = document.querySelector(this.getAttribute('href'));
       if (target) {
         const headerOffset = 80;
         const elementPosition = target.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-        
+
         window.scrollTo({
           top: offsetPosition,
           behavior: 'smooth'
@@ -238,7 +512,7 @@ function initSmoothScroll() {
       }
     });
   });
-  
+
   // Update active link on scroll
   window.addEventListener('scroll', updateActiveLink);
 }
@@ -246,13 +520,13 @@ function initSmoothScroll() {
 function updateActiveLink() {
   const sections = document.querySelectorAll('section[id]');
   const scrollPos = window.scrollY + 100;
-  
+
   sections.forEach(section => {
     const top = section.offsetTop;
     const height = section.offsetHeight;
     const id = section.getAttribute('id');
     const link = document.querySelector(`.nav__link[href="#${id}"]`);
-    
+
     if (scrollPos >= top && scrollPos < top + height) {
       document.querySelectorAll('.nav__link').forEach(l => l.classList.remove('nav__link--active'));
       if (link) link.classList.add('nav__link--active');
@@ -269,7 +543,7 @@ function initScrollAnimations() {
     rootMargin: '0px',
     threshold: 0.1
   };
-  
+
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -277,7 +551,7 @@ function initScrollAnimations() {
       }
     });
   }, observerOptions);
-  
+
   document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in').forEach(el => {
     observer.observe(el);
   });
@@ -288,15 +562,15 @@ function initScrollAnimations() {
 // ----------------------------------------
 function initProjectFilter() {
   if (!DOM.projectFilter) return;
-  
+
   const filterButtons = DOM.projectFilter.querySelectorAll('.filter__btn');
-  
+
   filterButtons.forEach(btn => {
     btn.addEventListener('click', () => {
       // Update active button
       filterButtons.forEach(b => b.classList.remove('filter__btn--active'));
       btn.classList.add('filter__btn--active');
-      
+
       // Filter projects
       const filter = btn.dataset.filter;
       filterProjects(filter);
@@ -306,15 +580,19 @@ function initProjectFilter() {
 
 function filterProjects(category) {
   const projects = DOM.projectsTimeline?.querySelectorAll('.git-tree__item');
-  
+
   projects?.forEach(project => {
     const projectCategory = project.dataset.category;
-    
+
     if (category === 'all' || projectCategory === category) {
       project.style.display = 'block';
-      project.style.opacity = '1';
+      setTimeout(() => {
+        project.style.opacity = '1';
+        project.style.transform = 'translateX(0)';
+      }, 50);
     } else {
       project.style.opacity = '0';
+      project.style.transform = 'translateX(-20px)';
       setTimeout(() => {
         project.style.display = 'none';
       }, 300);
@@ -327,33 +605,34 @@ function filterProjects(category) {
 // ----------------------------------------
 async function loadProjects() {
   if (!DOM.projectsTimeline) return;
-  
+
   try {
     const response = await fetch('data/projects.json');
     const data = await response.json();
-    
+
     renderProjects(data.projects);
+    setupProjectHoverEvents();
   } catch (error) {
     console.error('Error loading projects:', error);
-    // Fallback: render static content
-    renderProjectsFallback();
   }
 }
 
 function renderProjects(projects) {
   if (!DOM.projectsTimeline) return;
-  
-  // Keep the line element
+
   const lineHtml = '<div class="git-tree__line"></div>';
-  
+
   const projectsHtml = projects.map(project => `
-    <div class="git-tree__item ${project.featured ? 'git-tree__item--featured' : ''}" data-category="${project.category}">
+    <div class="git-tree__item ${project.featured ? 'git-tree__item--featured' : ''}" 
+         data-category="${project.category}" 
+         data-project-id="${project.id}"
+         style="transition: opacity 0.3s, transform 0.3s;">
       <div class="git-tree__node"></div>
       <div class="git-tree__date">${project.date}</div>
       <div class="git-tree__commit font-mono">${project.commit}</div>
       <div class="project-card ${project.featured ? 'project-card--featured' : ''} hover-lift">
         <div class="project-card__header">
-          <span class="project-card__icon">${getCategoryIcon(project.category)}</span>
+          <h3 class="project-card__title">${project.name}</h3>
           <div class="project-card__links">
             <a href="${project.github}" target="_blank" rel="noopener noreferrer" class="project-card__link" title="View on GitHub">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
@@ -362,7 +641,6 @@ function renderProjects(projects) {
             </a>
           </div>
         </div>
-        <h3 class="project-card__title">${project.name}</h3>
         <p class="project-card__description">${project.description}</p>
         <div class="project-card__tags">
           ${project.technologies.map(tech => `<span class="project-card__tag">${tech}</span>`).join('')}
@@ -370,23 +648,31 @@ function renderProjects(projects) {
       </div>
     </div>
   `).join('');
-  
+
   DOM.projectsTimeline.innerHTML = lineHtml + projectsHtml;
 }
 
-function getCategoryIcon(category) {
-  const icons = {
-    nlp: '🧠',
-    creative: '🎨',
-    research: '📚',
-    utilities: '🔧'
-  };
-  return icons[category] || '📦';
-}
+function setupProjectHoverEvents() {
+  const projectItems = document.querySelectorAll('.git-tree__item');
 
-function renderProjectsFallback() {
-  // Fallback content if JSON fails to load
-  // Projects are already in the HTML structure
+  projectItems.forEach(item => {
+    const projectId = item.dataset.projectId;
+
+    item.addEventListener('mouseenter', () => {
+      if (CONFIG.terminalPhrases[projectId]) {
+        changeTerminalPhraseSet(projectId);
+      }
+    });
+
+    item.addEventListener('mouseleave', () => {
+      // Return to default after a delay
+      setTimeout(() => {
+        if (!document.querySelector('.git-tree__item:hover')) {
+          changeTerminalPhraseSet('default');
+        }
+      }, 500);
+    });
+  });
 }
 
 // ----------------------------------------
@@ -409,16 +695,14 @@ document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initMode();
   initLanguage();
-  initTypewriter();
+  initTerminal();
+  initTerminalScrollFade();
   initMobileNav();
   initSmoothScroll();
   initScrollAnimations();
   initProjectFilter();
   initNavScroll();
   loadProjects();
-  
-  console.log('🚀 Portfolio initialized');
-  console.log('💡 Tip: Try clicking the ✨ toggle for a surprise!');
 });
 
 // ----------------------------------------
@@ -430,14 +714,11 @@ const konamiSequence = ['ArrowUp', 'ArrowUp', 'ArrowDown', 'ArrowDown', 'ArrowLe
 document.addEventListener('keydown', (e) => {
   konamiCode.push(e.key);
   konamiCode = konamiCode.slice(-10);
-  
+
   if (konamiCode.join(',') === konamiSequence.join(',')) {
-    // Activate artistic mode
     state.currentMode = 'artistic';
     applyMode('artistic');
     if (DOM.modeToggle) DOM.modeToggle.checked = true;
     localStorage.setItem(CONFIG.storageKeys.mode, 'artistic');
-    
-    console.log('🎉 Konami code activated! Welcome to artistic mode.');
   }
 });
