@@ -30,6 +30,13 @@
             "title": "Projects",
             "subtitle": "A selection of my work in AI, NLP, and creative coding",
             "filterAll": "All",
+            "filters": {
+                "all": "All",
+                "nlp": "NLP / AI",
+                "creative": "Creative Tools",
+                "research": "Research",
+                "utilities": "Utilities"
+            },
             "viewCode": "View Code",
             "viewDemo": "View Demo",
             "featured": "Featured"
@@ -110,6 +117,13 @@
             "title": "Proyectos",
             "subtitle": "Una selección de mi trabajo en IA, NLP y programación creativa",
             "filterAll": "Todos",
+            "filters": {
+                "all": "Todos",
+                "nlp": "NLP / IA",
+                "creative": "Herramientas creativas",
+                "research": "Investigación",
+                "utilities": "Utilidades"
+            },
             "viewCode": "Ver Código",
             "viewDemo": "Ver Demo",
             "featured": "Destacado"
