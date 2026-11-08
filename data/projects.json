@@ -1,19 +1,83 @@
 {
   "projects": [
     {
-      "id": "mind-industry",
-      "name": "mind-industry",
-      "description": "Multilingual Inconsistent Notion Detection (Industry version). Adapts research-level NLP techniques for industrial-scale applications, focusing on maintaining conceptual consistency across different languages.",
-      "technologies": ["Python", "Docker", "LLMs", "NLP", "Topic Modeling"],
+      "id": "fractal-studio",
+      "name": "fractal-studio",
+      "description": "A React + TypeScript fractal studio for constructing, tinkering with, and rendering fractals in the browser. Includes a WebGPU renderer with WGSL shaders, a Canvas2D fallback, a complex-number formula engine with parser and differentiator, and ambient time/weather-driven palettes.",
+      "technologies": ["TypeScript", "React", "WebGPU", "WGSL", "Vite"],
+      "category": "creative",
+      "github": "https://github.com/AlonsoMad/fractal-studio",
+      "featured": true,
+      "date": "2026",
+      "commit": "main/webgpu-renderer",
+      "highlights": [
+        "WebGPU + Canvas2D renderers",
+        "Formula parser and differentiator",
+        "Ambient time/weather palettes"
+      ]
+    },
+    {
+      "id": "cv-agent",
+      "name": "CV-agent",
+      "description": "A Mistral Workflows agent that searches the web for job openings matching a candidate CV, validates each fit, and emits a parsable CSV/JSON feed for a downstream agent. Re-verifies every source URL, then dedupes and ranks postings by match score.",
+      "technologies": ["Python", "Mistral", "LLMs", "Agents", "Web Search"],
       "category": "nlp",
-      "github": "https://github.com/AlonsoMad/mind-industry",
+      "github": "https://github.com/AlonsoMad/CV-agent",
+      "featured": true,
+      "date": "2026",
+      "commit": "main/mistral-workflow",
+      "highlights": [
+        "Web-search agent over job boards",
+        "Second-pass URL validation",
+        "Deterministic CSV/JSON output"
+      ]
+    },
+    {
+      "id": "claude-block",
+      "name": "ClaudeBlock",
+      "description": "A browser-based Breakout roguelike (\"BREAKER\") built with vanilla JavaScript and Canvas. Runs 25 levels with boss and casino stages, relics, capsules, unlocks, and a tuned in-game economy.",
+      "technologies": ["JavaScript", "Canvas", "Game Dev"],
+      "category": "creative",
+      "github": "https://github.com/AlonsoMad/ClaudeBlock",
+      "featured": false,
+      "date": "2026",
+      "commit": "main/roguelike-loop",
+      "highlights": [
+        "25-level run structure",
+        "Boss and casino stages",
+        "Relic and capsule economy"
+      ]
+    },
+    {
+      "id": "logtimizer",
+      "name": "Logtimizer",
+      "description": "An AI-powered log analyzer with a dual interface: an MCP server for AI agents and a web dashboard for humans. Fetches logs from Azure, AWS, and GCP, prunes redundant lines by 60-80%, and uses an LLM to explain and summarize errors.",
+      "technologies": ["Python", "MCP", "Docker", "LLMs", "Cloud"],
+      "category": "utilities",
+      "github": null,
+      "featured": false,
+      "date": "2025-2026",
+      "commit": "main/mcp-server",
+      "highlights": [
+        "MCP server + web dashboard",
+        "Azure/AWS/GCP log fetching",
+        "60-80% token pruning"
+      ]
+    },
+    {
+      "id": "mind",
+      "name": "MIND",
+      "description": "Research code and data for MIND: Multilingual Inconsistent Notion Detection, published at EMNLP 2025. Reproduces the paper's discrepancy-detection pipeline across multilingual QA, retrieval, and Wikipedia use cases.",
+      "technologies": ["Python", "Jupyter", "NLP", "LLMs", "Research"],
+      "category": "research",
+      "github": "https://github.com/lcalvobartolome/mind",
       "featured": true,
       "date": "2024-2025",
-      "commit": "feat/industry-adaption",
+      "commit": "paper/emnlp-2025",
       "highlights": [
-        "Polylingual topic modeling",
-        "Hybrid retrieval systems",
-        "Large Language Model integration"
+        "EMNLP 2025 paper code",
+        "Multilingual discrepancy detection",
+        "Reproducible ablations"
       ]
     },
     {
