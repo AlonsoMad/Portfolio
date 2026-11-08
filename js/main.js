@@ -567,7 +567,7 @@ function filterProjects(category) {
   projects?.forEach(project => {
     const projectCategory = project.dataset.category;
 
-    if (category === 'all' || projectCategory === category) {
+    if (category === 'all' || projectCategory.split(' ').includes(category)) {
       project.style.display = 'block';
       setTimeout(() => {
         project.style.opacity = '1';
@@ -607,7 +607,7 @@ function renderProjects(projects) {
 
   const projectsHtml = projects.map(project => `
     <div class="git-tree__item ${project.featured ? 'git-tree__item--featured' : ''}" 
-         data-category="${project.category}" 
+         data-category="${[].concat(project.category).join(' ')}" 
          data-project-id="${project.id}"
          style="transition: opacity 0.3s, transform 0.3s;">
       <div class="git-tree__node"></div>

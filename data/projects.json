@@ -17,6 +17,22 @@
       ]
     },
     {
+      "id": "mind",
+      "name": "MIND",
+      "description": "Research code and data for MIND: Multilingual Inconsistent Notion Detection, published at EMNLP 2025. Reproduces the paper's discrepancy-detection pipeline across multilingual QA, retrieval, and Wikipedia use cases.",
+      "technologies": ["Python", "Jupyter", "NLP", "LLMs", "Research"],
+      "category": ["research", "nlp"],
+      "github": "https://github.com/lcalvobartolome/mind",
+      "featured": true,
+      "date": "2024-2025",
+      "commit": "paper/emnlp-2025",
+      "highlights": [
+        "EMNLP 2025 paper code",
+        "Multilingual discrepancy detection",
+        "Reproducible ablations"
+      ]
+    },
+    {
       "id": "cv-agent",
       "name": "CV-agent",
       "description": "A Mistral Workflows agent that searches the web for job openings matching a candidate CV, validates each fit, and emits a parsable CSV/JSON feed for a downstream agent. Re-verifies every source URL, then dedupes and ranks postings by match score.",
@@ -62,22 +78,6 @@
         "MCP server + web dashboard",
         "Azure/AWS/GCP log fetching",
         "60-80% token pruning"
-      ]
-    },
-    {
-      "id": "mind",
-      "name": "MIND",
-      "description": "Research code and data for MIND: Multilingual Inconsistent Notion Detection, published at EMNLP 2025. Reproduces the paper's discrepancy-detection pipeline across multilingual QA, retrieval, and Wikipedia use cases.",
-      "technologies": ["Python", "Jupyter", "NLP", "LLMs", "Research"],
-      "category": "research",
-      "github": "https://github.com/lcalvobartolome/mind",
-      "featured": true,
-      "date": "2024-2025",
-      "commit": "paper/emnlp-2025",
-      "highlights": [
-        "EMNLP 2025 paper code",
-        "Multilingual discrepancy detection",
-        "Reproducible ablations"
       ]
     },
     {
